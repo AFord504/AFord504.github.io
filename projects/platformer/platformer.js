@@ -44,11 +44,68 @@ $(function () {
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
 
-    createPlatform(0, 200, 1000, 10);
-    createPlatform(0, 0, 1350, 10);
-    createPlatform(0,0,10,200);
-    createPlatform(1350,0,10,200);
-    createPlatform(1200, 200, 150, 10);
+    // Floor 1
+    createPlatform(50, 200, 1150, 10);
+    createPlatform(50, 0, 1300, 10);
+    createPlatform(50, 0, 10, 200);
+    createPlatform(1350, 0, 10, 200);
+    
+    createPlatform(50, 100, 150, 10);
+    createPlatform(200, 0, 10, 100);
+
+    createPlatform(300, 100, 150, 10);
+    createPlatform(300, 0, 10, 100);
+    createPlatform(450, 0, 10, 100);
+
+    createPlatform(550, 100, 150, 10);
+    createPlatform(550, 0, 10, 100);
+    createPlatform(700, 0, 10, 100);
+
+    createPlatform(800, 100, 150, 10);
+    createPlatform(800, 0, 10, 100);
+    createPlatform(950, 0, 10, 100);
+
+    createPlatform(1050, 100, 150, 10);
+    createPlatform(1050, 0, 10, 100);
+    createPlatform(1200, 0, 10, 100);
+
+    //Floor 2
+    createPlatform(200, 400, 1150, 10);
+    createPlatform(1350, 200, 10, 200);
+    createPlatform(50, 200, 10, 200);
+
+    createPlatform(1200, 300, 150, 10);
+    createPlatform(1200, 300, 10, 100);
+
+    createPlatform(900, 300, 150, 10);
+    createPlatform(900, 300, 10, 100);
+    createPlatform(1050, 300, 10, 100);
+
+    createPlatform(600, 300, 150, 10);
+    createPlatform(600, 300, 10, 100);
+    createPlatform(750, 300, 10, 100);
+
+    createPlatform(300, 300, 150, 10);
+    createPlatform(300, 300, 10, 100);
+    createPlatform(450, 300, 10, 100);
+
+    //Floor 3
+    createPlatform(50, 400, 10, 400);
+    createPlatform(1350, 400, 10, 400);
+
+    createPlatform(50, 600, 150, 10);
+    createPlatform(200, 600, 10, 200);
+
+    createPlatform(1200, 600, 150, 10);
+    createPlatform(1200, 600, 10, 200);
+
+    createPlatform(400, 650, 75, 10);
+
+    createPlatform(600, 650, 75, 10);
+
+    createPlatform(800, 650, 75, 10);
+
+    createPlatform(1000, 650, 75, 10);
 
     // TODO 2
     // Create collectables
@@ -56,13 +113,20 @@ $(function () {
     // Your collectable choices are 'database' 'diamond' 'grace' 'kennedi' 'max' and 'steve'; more can be added if you wish
     // example usage: createCollectable(type, x, y, gravity, bounce)
 
+    createCollectable("max", 1250, 250, 0, 0);
+    createCollectable("steve", 100, 550, 0, 0);
+    createCollectable("grace", 1250, 550, 0, 0);
+
     // TODO 3
     // Create cannons
     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
 
-    createCannon(right, 100, 3000);
+    createCannon("right", 225, 1700);
+    createCannon("left", 300, 900);
+    createCannon("right", 775, 50);
+    createCannon("right", 675, 1500);
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
