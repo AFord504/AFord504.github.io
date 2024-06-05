@@ -66,16 +66,17 @@ h2, h3 {
 
 /* portfolio styles */
 .content h1 {
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 #portfolio {
     list-style-type: none;
     padding-left: 0;
+    color: black
 }
 
 #portfolio li {
-    background: #202020;
+    background: #e73f3f;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -87,7 +88,7 @@ h2, h3 {
 
 #portfolio a {
     text-decoration: none;
-    color: #454545;
+    color: #ffffff;
 }
 
 /* responsive web design */
