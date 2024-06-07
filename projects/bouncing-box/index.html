@@ -71,6 +71,9 @@
        
         var positionY = 200;
         var speedY = 10;
+
+        var randNumX = Math.random() * boardWidth;
+        var randNumY = Math.random() * 550;
         
         /* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -106,8 +109,8 @@
 			the left side of the screen.
 			*/
         function handleBoxClick() {
-          positionX = 0;
-          positionY = 200;
+          positionX = randNumX;
+          positionY = randNumY;
           points = points + 1;
           changeBoxText(points);
           if (speedX > 0) {
