@@ -97,7 +97,7 @@
           if (positionY > -1) {
             speedY = speedY * -1;
           }
-          if (positionY < 550) {
+          if (positionY < boardHeight) {
             speedY = speedY * -1;
           }
         }
@@ -109,7 +109,7 @@
 			*/
         function handleBoxClick() {
           var randNumX = Math.random() * boardWidth;
-          var randNumY = Math.random() * 550;
+          var randNumY = Math.random() * boardHeight;
 
           positionX = randNumX;
           positionY = randNumY;
