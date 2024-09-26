@@ -76,7 +76,6 @@ function update() {
   if (hasCollidedWithApple()) {
     handleAppleCollision();
   }
-    
 }
 
 function checkForNewDirection(event) {
@@ -359,14 +358,14 @@ function getRandomAvailablePosition() {
     randomPosition.column = Math.floor(Math.random() * COLUMNS);
     randomPosition.row = Math.floor(Math.random() * ROWS);
 
+    spaceIsAvailable = true;
+
     for (var i = snake.body.length - 1; i >= 0; i--) {
       snakeSquare = snake.body[i];
       if (randomPosition.column === snakeSquare.column) {
         if (randomPosition.row === snakeSquare.row) {
           spaceIsAvailable = false;
         }
-      } else {
-        spaceIsAvailable = true;
       }
     }
 
