@@ -11,11 +11,22 @@ body {
   position: relative;
 }
 
-#gameItem {
+#walker {
   background-color: teal;
   width: 50px;
   height: 50px;
+  border-radius: 50px;
   position: absolute;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+  left: 0px; /* Uncomment if you want to set a "starting" position */
+  top: 0px; /* Uncomment if you want to set a "starting" position */
+}
+
+#wonderer {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  position: absolute;
+  left: 390px; /* Uncomment if you want to set a "starting" position */
+  top: 390px; /* Uncomment if you want to set a "starting" position */
 }
