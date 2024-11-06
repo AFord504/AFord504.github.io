@@ -33,12 +33,6 @@ var runLevels = function (window) {
       obstacleImage.x = -25;
       obstacleImage.y = -25;
     }
-    createSawBlade(500, 175);
-    createSawBlade(700, 300);
-    createSawBlade(900, 175);
-    createSawBlade(1100, 300);
-    createSawBlade(1300, 175);
-    createSawBlade(1500, 300);
 
     function createEnemy(x, y) {
       var enemy = game.createGameItem("enemy", 25);
@@ -60,9 +54,6 @@ var runLevels = function (window) {
         enemy.fadeOut();
       };
     }
-    createEnemy(1050, groundY - 50);
-    createEnemy(1650, groundY - 50);
-    createEnemy(2250, groundY - 50);
 
     function createReward(x, y) {
       var reward = game.createGameItem("reward", 25);
@@ -83,7 +74,6 @@ var runLevels = function (window) {
         reward.fadeOut();
       };
     }
-    createReward(3000, groundY - 50);
 
     function createMarker(x, y) {
       var marker = game.createGameItem("marker", 25);
@@ -104,10 +94,25 @@ var runLevels = function (window) {
         marker.fadeOut();
       };
     }
-    createMarker(4000, groundY - 50);
 
     function startLevel() {
       // TODO 13 goes below here
+      var level = levelData[currentLevel];
+      var levelObjects = level.gameItems;
+      for (var i = 0; i < levelObjects.length; i++) {
+        if (levelObjects[i].type === "sawblade") {
+          createSawBlade(levelObjects[i].x, levelObjects[i].y)
+        }
+        if (levelObjects[i].type === "enemy") {
+          createEnemy(levelObjects[i].x, levelObjects[i].y)
+        }
+        if (levelObjects[i].type === "reward") {
+          createReward(levelObjects[i].x, levelObjects[i].y)
+        }
+        if (levelObjects[i].type === "marker") {
+          createMarker(levelObjects[i].x, levelObjects[i].y)
+        }
+      }
 
       //////////////////////////////////////////////
       // DO NOT EDIT CODE BELOW HERE
