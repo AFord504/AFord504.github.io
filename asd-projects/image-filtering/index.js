@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applySmudge(5, 3, "right");
+  applySmudge();
   //applyFilterNoBackground(reddify);
   //applyFilterNoBackground(decreaseBlue);
   //applyFilterNoBackground(increaseGreenByBlue);
@@ -84,8 +84,9 @@ function increaseGreenByBlue(arr) {
 }
 
 // CHALLENGE code goes below here
-function applySmudge(x, y, direction) {
-  var alteredPixel;
+function applySmudge() {
+
+  /*
   if (direction === "up") {
     alteredPixel = image[y - 1][x];
   } else if (direction === "down") {
@@ -95,16 +96,22 @@ function applySmudge(x, y, direction) {
   } else if (direction === "right") {
     alteredPixel = image[y][x + 1];
   }
+  */
 
-  var rgbString1 = alteredPixel;
-  var rgbString2 = image[y][x];
+  for (var r = 0; r < image.length; r++) {
+    var row = image[r];
+    for (var c = 0; c < row.length; c++) {
+      var rgbString1 = row[c + 1];
+      var rgbString2 = row[c];
       var rgbNumbers1 = rgbStringToArray(rgbString1);
       var rgbNumbers2 = rgbStringToArray(rgbString2);
       mix(rgbNumbers1, rgbNumbers2);
       rgbString1 = rgbArrayToString(rgbNumbers1);
       rgbString2 = rgbArrayToString(rgbNumbers2);
-      alteredPixel = rgbString1;
-      image[y][x] = rgbString2;
+      row[c + 1] = rgbString1;
+      row[c] = rgbString2;
+    }
+  }
 }
 
 function mix(mixed, mixer) {
