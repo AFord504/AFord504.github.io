@@ -109,7 +109,6 @@ function applySmudge() {
       rgbString1 = rgbArrayToString(rgbNumbers1);
       rgbString2 = rgbArrayToString(rgbNumbers2);
       row[c + 1] = rgbString1;
-      row[c] = rgbNumbers2;
     }
   }
 }
