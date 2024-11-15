@@ -20,8 +20,10 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter()
-  
+  applySmudge(5, 3, "right");
+  //applyFilterNoBackground(reddify);
+  //applyFilterNoBackground(decreaseBlue);
+  //applyFilterNoBackground(increaseGreenByBlue);
 
   // do not change the below line of code
   render($("#display"), image);
@@ -32,13 +34,13 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2 & 4: Create the applyFilter function here
-function applyFilter() {
+function applyFilter(filterFunction) {
   for (var r = 0; r < image.length; r++) {
     var row = image[r];
     for (var c = 0; c < row.length; c++) {
       var rgbString = row[c];
       var rgbNumbers = rgbStringToArray(rgbString);
-      rgbNumbers[RED] = 255;
+      filterFunction(rgbNumbers);
       rgbString = rgbArrayToString(rgbNumbers);
       row[c] = rgbString;
     }
@@ -46,10 +48,26 @@ function applyFilter() {
 }
 
 // TODO 7: Create the applyFilterNoBackground function
-
+function applyFilterNoBackground(filterFunction) {
+  var background = image[0][0];
+  for (var r = 0; r < image.length; r++) {
+    var row = image[r];
+    for (var c = 0; c < row.length; c++) {
+      var rgbString = row[c];
+      if (rgbString !== background) {
+        var rgbNumbers = rgbStringToArray(rgbString);
+        filterFunction(rgbNumbers);
+        rgbString = rgbArrayToString(rgbNumbers);
+        row[c] = rgbString;
+      }
+    }
+  }
+}
 
 // TODO 5: Create the keepInBounds function
-
+function keepInBounds(num) {
+  return Math.max(Math.min(num, 255), 0);
+}
 
 // TODO 3: Create reddify function
 function reddify(arr) {
@@ -57,6 +75,40 @@ function reddify(arr) {
 }
 
 // TODO 6: Create more filter functions
+function decreaseBlue(arr) {
+  arr[BLUE] = keepInBounds((arr[BLUE] -= 50));
+}
 
+function increaseGreenByBlue(arr) {
+  arr[GREEN] = keepInBounds(arr[GREEN] + arr[BLUE]);
+}
 
 // CHALLENGE code goes below here
+function applySmudge(x, y, direction) {
+  var alteredPixel;
+  if (direction === "up") {
+    alteredPixel = image[y - 1][x];
+  } else if (direction === "down") {
+    alteredPixel = image[y + 1][x];
+  } else if (direction === "left") {
+    alteredPixel = image[y][x - 1];
+  } else if (direction === "right") {
+    alteredPixel = image[y][x + 1];
+  }
+
+  var rgbString1 = alteredPixel;
+  var rgbString2 = image[y][x];
+      var rgbNumbers1 = rgbStringToArray(rgbString1);
+      var rgbNumbers2 = rgbStringToArray(rgbString2);
+      mix(rgbNumbers1, rgbNumbers2);
+      rgbString1 = rgbArrayToString(rgbNumbers1);
+      rgbString2 = rgbArrayToString(rgbNumbers2);
+      alteredPixel = rgbString1;
+      image[y][x] = rgbString2;
+}
+
+function mix(mixed, mixer) {
+  mixed[BLUE] = (mixed[BLUE] + mixer[BLUE]) / 2;
+  mixed[RED] = (mixed[RED] + mixer[RED]) / 2;
+  mixed[GREEN] = (mixed[GREEN] + mixer[GREEN]) / 2;
+}
