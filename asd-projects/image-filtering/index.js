@@ -85,22 +85,9 @@ function increaseGreenByBlue(arr) {
 
 // CHALLENGE code goes below here
 function applySmudge() {
-
-  /*
-  if (direction === "up") {
-    alteredPixel = image[y - 1][x];
-  } else if (direction === "down") {
-    alteredPixel = image[y + 1][x];
-  } else if (direction === "left") {
-    alteredPixel = image[y][x - 1];
-  } else if (direction === "right") {
-    alteredPixel = image[y][x + 1];
-  }
-  */
-
   for (var r = 0; r < image.length; r++) {
     var row = image[r];
-    for (var c = 0; c < row.length - 1; c++) {
+    for (var c = 1; c < row.length - 1; c++) {
       var rgbString1 = row[c + 1];
       var rgbString2 = row[c];
       var rgbNumbers1 = rgbStringToArray(rgbString1);
@@ -109,8 +96,32 @@ function applySmudge() {
       rgbString1 = rgbArrayToString(rgbNumbers1);
       rgbString2 = rgbArrayToString(rgbNumbers2);
       row[c + 1] = rgbString1;
+
+      var rgbString1 = row[c - 1];
+      var rgbString2 = row[c];
+      var rgbNumbers1 = rgbStringToArray(rgbString1);
+      var rgbNumbers2 = rgbStringToArray(rgbString2);
+      mix(rgbNumbers1, rgbNumbers2);
+      rgbString1 = rgbArrayToString(rgbNumbers1);
+      rgbString2 = rgbArrayToString(rgbNumbers2);
+      row[c - 1] = rgbString1;
     }
   }
+  /*
+  for (var r = 0; r < image.length; r++) {
+    var row = image[r];
+    for (var c = 1; c < row.length; c++) {
+      var rgbString1 = row[c - 1];
+      var rgbString2 = row[c];
+      var rgbNumbers1 = rgbStringToArray(rgbString1);
+      var rgbNumbers2 = rgbStringToArray(rgbString2);
+      mix(rgbNumbers1, rgbNumbers2);
+      rgbString1 = rgbArrayToString(rgbNumbers1);
+      rgbString2 = rgbArrayToString(rgbNumbers2);
+      row[c - 1] = rgbString1;
+    }
+  }
+  */
 }
 
 function mix(mixed, mixer) {
