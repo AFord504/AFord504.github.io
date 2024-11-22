@@ -107,21 +107,6 @@ function applySmudge() {
       row[c - 1] = rgbString1;
     }
   }
-  /*
-  for (var r = 0; r < image.length; r++) {
-    var row = image[r];
-    for (var c = 1; c < row.length; c++) {
-      var rgbString1 = row[c - 1];
-      var rgbString2 = row[c];
-      var rgbNumbers1 = rgbStringToArray(rgbString1);
-      var rgbNumbers2 = rgbStringToArray(rgbString2);
-      mix(rgbNumbers1, rgbNumbers2);
-      rgbString1 = rgbArrayToString(rgbNumbers1);
-      rgbString2 = rgbArrayToString(rgbNumbers2);
-      row[c - 1] = rgbString1;
-    }
-  }
-  */
 }
 
 function mix(mixed, mixer) {
