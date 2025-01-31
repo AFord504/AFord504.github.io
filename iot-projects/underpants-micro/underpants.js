@@ -61,6 +61,17 @@ _.indexOf = function (arr, val) {
  * Examples:
  *   _.contains([1,"two", 3.14], "two") -> true
  */
+_.contains = function (arr, val) {
+  if (!val) {
+    return false;
+  }
+  for (var i = 0; i < arr.length; i++) {
+    if (val === arr[i]) {
+      return true;
+    }
+  }
+  return false;
+};
 
 /** _.each
  * Arguments:
@@ -74,6 +85,11 @@ _.indexOf = function (arr, val) {
  *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
  *      -> should log "a" "b" "c" to the console
  */
+_.each = function (arr, func) {
+  for (var i = 0; i < arr.length; i++) {
+    func(arr[i], i, arr);
+  }
+};
 
 /** _.filter
  * Arguments:
@@ -90,6 +106,15 @@ _.indexOf = function (arr, val) {
  * Challenge:
  *   use _.each in your implementation
  */
+_.filter = function (arr, func) {
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (_.each(arr, func) === true) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+};
 
 /** _.reject
  * Arguments:
@@ -103,6 +128,15 @@ _.indexOf = function (arr, val) {
  * Examples:
  *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
  */
+_.reject = function (arr, func) {
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (func(arr[i], i, arr) === false) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+};
 
 /** _.map
  * Arguments:
@@ -117,6 +151,13 @@ _.indexOf = function (arr, val) {
  * Examples:
  *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
  */
+_.map = function (arr, func) {
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    newArr.push(func(arr[i], i, arr));
+  }
+  return newArr;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
