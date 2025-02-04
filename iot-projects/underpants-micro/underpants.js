@@ -109,7 +109,7 @@ _.each = function (arr, func) {
 _.filter = function (arr, func) {
   var newArr = [];
   for (var i = 0; i < arr.length; i++) {
-    if (func(arr[i], i, arr) === false) {
+    if (func(arr[i], i, arr) === true) {
       newArr.push(arr[i]);
     }
   }
