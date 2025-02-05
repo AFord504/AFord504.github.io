@@ -19,11 +19,10 @@ var _ = {};
  *   _.identity(5) === 5
  *   _.identity({a: "b"}) === {a: "b"}
  */
+
 _.identity = function (val) {
   return val;
 };
-
-console.log(_.identity(55));
 
 /** _.indexOf
  * Arguments:
