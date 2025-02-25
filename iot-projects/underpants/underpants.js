@@ -212,6 +212,8 @@ _.each = function (coll, func) {
       func(coll[i], i, coll);
     }
   }
+  if (type(coll) === "Object") {
+  }
 };
 
 /** _.unique

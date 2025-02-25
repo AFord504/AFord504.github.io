@@ -35,13 +35,15 @@
 
   // set initial properties for the paddles
   paddlePlayer.yVelocity = 0;
-  paddleCPU.yVelocity = 6;
+  paddleCPU.yVelocity = 4.3;
 
   // set initial properties for the ball
   ball.x = canvas.width / 2;
   ball.y = canvas.height / 2;
   ball.xVelocity = 5;
   ball.yVelocity = 5;
+  ball.radius = 20;
+  ball.accelerate = 0;
 
   // add the paddles and the ball to the view
   stage.addChild(paddlePlayer, paddleCPU, ball);
@@ -88,21 +90,50 @@
     }
 
     // AI movement: CPU follows ball //
-    if ((paddleCPU.y + midCPU) < (ball.y - 14)) {
+    if (paddleCPU.y + midCPU < ball.y - 16) {
       paddleCPU.y += paddleCPU.yVelocity;
-    } else if ((paddleCPU.y + midCPU) > (ball.y + 14)) {
+    } else if (paddleCPU.y + midCPU > ball.y + 16) {
       paddleCPU.y -= paddleCPU.yVelocity;
     }
 
     // TODO 1: bounce the ball off the top
-
+    if (ball.y - ball.radius <= 0 || ball.y + ball.radius >= canvas.height) {
+      ball.yVelocity = ball.yVelocity * -1;
+      createjs.Sound.play("wall");
+    }
 
     // TODO 2: bounce the ball off the bottom
 
-
     // TODO 3: bounce the ball off each of the paddles
+    if (
+      ball.x - ball.radius < paddleCPU.x + widthCPU &&
+      ball.x + ball.radius > paddleCPU.x &&
+      ball.y - ball.radius < paddleCPU.y + heightCPU &&
+      ball.y + ball.radius > paddleCPU.y
+    ) {
+      ball.accelerate = ball.accelerate + 0.1;
+      ball.xVelocity = ball.xVelocity * -1 - ball.accelerate;
+      createjs.Sound.play("hit");
+    }
+    if (
+      ball.x - ball.radius < paddlePlayer.x + widthPlayer &&
+      ball.x + ball.radius > paddlePlayer.x &&
+      ball.y - ball.radius < paddlePlayer.y + heightPlayer &&
+      ball.y + ball.radius > paddlePlayer.y
+    ) {
+      ball.accelerate = ball.accelerate + 0.1;
+      ball.xVelocity = ball.xVelocity * -1 + ball.accelerate;
+      createjs.Sound.play("hit");
+    }
 
-
+    if (ball.x + ball.radius >= canvas.width) {
+      ballReset();
+      ballLaunch("left");
+    }
+    if (ball.x - ball.radius <= 0) {
+      ballReset();
+      ballLaunch("right");
+    }
   }
 
   // helper function that wraps the draw.rect function for easy paddle making
@@ -117,5 +148,26 @@
     paddle.x = x;
     paddle.y = y;
     return paddle;
+  }
+
+  function ballReset() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.xVelocity = 0;
+    ball.yVelocity = 0;
+    ball.accelerate = 0;
+  }
+
+  function ballLaunch(side) {
+    if (side === "right") {
+      ball.xVelocity = 5 + ball.accelerate;
+    } else {
+      ball.xVelocity = -5 - ball.accelerate;
+    }
+    if (Math.ceil(Math.random() * 2 === 1)) {
+      ball.yVelocity = 5;
+    } else {
+      ball.yVelocity = -5;
+    }
   }
 })(window, window.createjs, window.opspark, window._);
