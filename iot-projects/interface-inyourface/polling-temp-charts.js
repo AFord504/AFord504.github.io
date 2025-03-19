@@ -92,28 +92,48 @@ $(document).ready(function () {
     );
 
     // TODO 4: Update high and low records
-    function updateRecords(method, value) {
-      if (value > method.highest) {
-        method.highest = value;
-        $("#" + method + "-highest").text(
-          `Highest recorded value is ${method.highest}`
-        );
+    function updateJSONRecords(value) {
+      if (value > json.highest) {
+        json.highest = value;
+        $("#json-highest").text(`Highest recorded value is ${json.highest}`);
       }
-      if (value < method.lowest) {
-        method.lowest = value;
-        $("#" + method + "-lowest").text(
-          `Lowest recorded value is ${method.lowest}`
-        );
+      if (value < json.lowest) {
+        json.lowest = value;
+        $("#json-lowest").text(`Lowest recorded value is ${json.lowest}`);
+      }
+    }
+    function updateAJAXRecords(value) {
+      if (value > ajax.highest) {
+        ajax.highest = value;
+        $("#ajax-highest").text(`Highest recorded value is ${ajax.highest}`);
+      }
+      if (value < ajax.lowest) {
+        ajax.lowest = value;
+        $("#ajax-lowest").text(`Lowest recorded value is ${ajax.lowest}`);
+      }
+    }
+    function updateWSRecords(value) {
+      if (value > ws.highest) {
+        ws.highest = value;
+        $("#ws-highest").text(`Highest recorded value is ${ws.highest}`);
+      }
+      if (value < ws.lowest) {
+        ws.lowest = value;
+        $("#ws-lowest").text(`Lowest recorded value is ${ws.lowest}`);
       }
     }
 
     // TODO 5: Regular JSON Polling
-    $.getJSON("http://localhost:8080/", function (result) {
-      addDataPoint(result, jsonData, jsonChart);
-      updateRecords(result.value);
-    });
+    function doJSONPoll() {
+      $.getJSON("http://localhost:8080/", function (result) {
+        addDataPoint(result, jsonData, jsonChart);
+        updateJSONRecords(result.value);
 
-    setInterval(doJSONPoll);
+        console.log($("#json-highest"));
+      });
+    }
+
+    setInterval(doJSONPoll, 5000);
 
     // TODO 6: AJAX Polling
 
