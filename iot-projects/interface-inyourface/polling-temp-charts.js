@@ -51,10 +51,69 @@ $(document).ready(function () {
     }
 
     // TODO 3: Initialize high and low records
+    const json = {
+      highest: 0,
+      lowest: 100,
+      highID: "#json-highest",
+      lowID: "#json-lowest",
+    };
+    const ajax = {
+      highest: 0,
+      lowest: 100,
+      highID: "#ajax-highest",
+      lowID: "#ajax-lowest",
+    };
+    const ws = {
+      highest: 0,
+      lowest: 100,
+      highID: "#ws-highest",
+      lowID: "#ws-lowest",
+    };
+
+    $("#json-chart-container").append(
+      `<p id=${json.highID}>Highest recorded JSON value is ${json.highest}</p>`
+    );
+    $("#json-chart-container").append(
+      `<p id=${json.lowID}>Lowest recorded JSON value is ${json.lowest}</p>`
+    );
+
+    $("#ajax-chart-container").append(
+      `<p id=${ajax.highID}>Highest recorded AJAX value is ${ajax.highest}</p>`
+    );
+    $("#ajax-chart-container").append(
+      `<p id=${ajax.lowID}>Lowest recorded AJAX value is ${ajax.lowest}</p>`
+    );
+
+    $("#ws-chart-container").append(
+      `<p id=${ws.highID}>Highest recorded WS value is ${ws.highest}</p>`
+    );
+    $("#ws-chart-container").append(
+      `<p id=${ws.lowID}>Lowest recorded WS value is ${ws.lowest}</p>`
+    );
 
     // TODO 4: Update high and low records
+    function updateRecords(method, value) {
+      if (value > method.highest) {
+        method.highest = value;
+        $("#" + method + "-highest").text(
+          `Highest recorded value is ${method.highest}`
+        );
+      }
+      if (value < method.lowest) {
+        method.lowest = value;
+        $("#" + method + "-lowest").text(
+          `Lowest recorded value is ${method.lowest}`
+        );
+      }
+    }
 
     // TODO 5: Regular JSON Polling
+    $.getJSON("http://localhost:8080/", function (result) {
+      addDataPoint(result, jsonData, jsonChart);
+      updateRecords(result.value);
+    });
+
+    setInterval(doJSONPoll);
 
     // TODO 6: AJAX Polling
 
