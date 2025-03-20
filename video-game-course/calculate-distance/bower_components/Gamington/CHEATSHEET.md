@@ -10,6 +10,19 @@ To release your library to `bower` initially:
 
 <hr>
 
+### Check Tag History
+
+Run `git tag -l` command to view your tag history
+
+### Import into a Different Project
+
+To add your library to a project (specifically, a project in the video-game course.)
+
+1. `cd video-game-course/<project-name>` goes into game project
+2. `bower install --save https://github.com/AFord504/Gamington.git` NOTE: .git is incredibly important.
+3. `cd ../..` This just gets you out of the project for git adding and stuff.
+
+
 ### Updating 
 
 To re-release your library to `bower`:

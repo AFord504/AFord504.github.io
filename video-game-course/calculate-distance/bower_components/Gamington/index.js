@@ -2,18 +2,17 @@
     window.gamington = window.gamington || {
       numz: {
         getDistance(pointA, pointB) {
-        const distanceX = pointB.x - pointA.x;
-        const distanceY = pointB.y - pointA.y;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        return distance;
-},
+          const distanceX = pointB.x - pointA.x;
+          const distanceY = pointB.y - pointA.y;
+          const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+          return distance;
+        },
       },
       phyz: {
         /**
          * Returns an Object with basic properties utilized in a 
          * 2D physics system. On top of simple physical properties,
          * the body has template methods handleCollision() and update().
-         * 
          * @param {String} type: A String, should be unique to your
          * system, representing the type of body.
          * @param {Object} options.
