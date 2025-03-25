@@ -3,12 +3,6 @@ const port = 3000;
 
 var serverStatus = undefined;
 
-/*
-I couldn't get the PUT request to respond with "The server has 
-been updated.-and the message arrived" due to the finally block,
-but the rest works.
-*/
-
 const server = http
   .createServer(function (req, res) {
     try {
@@ -21,31 +15,25 @@ const server = http
           body += chunk.toString();
         });
         req.on("end", function () {
-          try {
-            parsedBody = JSON.parse(body);
+          parsedBody = JSON.parse(body);
 
-            if (parsedBody.message) {
-              serverStatus = parsedBody.message;
-              res.writeHead(200, { "Content-Type": "text/plain" });
-              res.write("The server has been updated.");
-            } else {
-              res.writeHead(400, { "Content-Type": "text/plain" });
-              res.write("Invalid JSON format.");
-            }
-          } catch (error) {
+          if (parsedBody.message) {
+            serverStatus = parsedBody.message;
+            res.writeHead(200, { "Content-Type": "text/plain" });
+            res.write("The server has been updated.");
+          } else {
             res.writeHead(400, { "Content-Type": "text/plain" });
-            res.write("Invalid JSON format.");
+            res.write("Invalid data.");
           }
-        });
-        req.on("error", function () {
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.write("Error receiving data.");
         });
       }
     } catch {
       res.writeHead(500, { "Content-Type": "text/plain" });
       res.write("The server has no data.");
     } finally {
+      if (serverStatus) {
+        res.write("The server has been updated.");
+      }
       res.write("-and the message arrived");
       res.end();
     }
