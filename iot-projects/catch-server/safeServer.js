@@ -11,7 +11,7 @@ const server = http
         res.write(serverStatus);
       } else if (req.method === "PUT") {
         body = "";
-        req.on("data", function (chunk) {
+        req.on("data", function (data) {
           body += data;
         });
         req.on("end", function () {
