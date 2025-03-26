@@ -1,0 +1,28 @@
+{
+  "name": "Gamington",
+  "main": "index.js",
+  "homepage": "https://github.com/AFord504/Gamington",
+  "authors": [
+    "aford504 <ahmadford504@gmail.com>"
+  ],
+  "description": "gaming library for vgp",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.3.0",
+  "_release": "1.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.3.0",
+    "commit": "8d5f91906a156308f817838f41bf3a95b4bf9ff0"
+  },
+  "_source": "https://github.com/AFord504/Gamington.git",
+  "_target": "^1.3.0",
+  "_originalSource": "https://github.com/AFord504/Gamington.git",
+  "_direct": true
+}
