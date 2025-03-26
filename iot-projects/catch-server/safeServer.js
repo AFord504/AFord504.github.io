@@ -12,19 +12,11 @@ const server = http
       } else if (req.method === "PUT") {
         body = "";
         req.on("data", function (chunk) {
-          body += chunk.toString();
+          body += data;
         });
         req.on("end", function () {
           parsedBody = JSON.parse(body);
-
-          if (parsedBody.message) {
-            serverStatus = parsedBody.message;
-            res.writeHead(200, { "Content-Type": "text/plain" });
-            res.write("The server has been updated.");
-          } else {
-            res.writeHead(400, { "Content-Type": "text/plain" });
-            res.write("Invalid data.");
-          }
+          serverStatus = parsedBody.message;
         });
       }
     } catch {
@@ -32,6 +24,7 @@ const server = http
       res.write("The server has no data.");
     } finally {
       if (serverStatus) {
+        res.writeHead(200, { "Content-Type": "text/plain" });
         res.write("The server has been updated.");
       }
       res.write("-and the message arrived");
