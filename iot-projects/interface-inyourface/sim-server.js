@@ -10,7 +10,8 @@ var temperature = 72;
 var nextChange = 0;
 
 function generateTemperature() {
-  let changeDifference = Math.random() - 0.5;
+  let changeRate = Math.ceil(Math.random() * 5);
+  let changeDifference = Math.random() * changeRate - changeRate * 0.5;
   nextChange += changeDifference;
   temperature += nextChange;
 
