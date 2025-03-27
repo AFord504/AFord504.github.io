@@ -1,0 +1,17 @@
+{
+  "name": "Gamington",
+  "main": "index.js",
+  "homepage": "https://github.com/AFord504/Gamington",
+  "authors": [
+    "aford504 <ahmadford504@gmail.com>"
+  ],
+  "description": "gaming library for vgp",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
