@@ -10,15 +10,33 @@
 
   stage.addChild(textfield);
 
+  const calculateRotation = gamington.numz.getAngleDegrees;
+  const calculateDistance = gamington.numz.getDistance;
+
   // try a different hex color if you want //
-  const ship = assets.makeShip("#4286f4");
+  const ship1 = assets.makeShip("red");
+  const ship2 = assets.makeShip("blue");
 
   // TODO 5: Center the ship on the stage //
-  ship.x = canvas.width / 2;
-  ship.y = canvas.height / 2;
+  ship1.x = canvas.width / 2;
+  ship1.y = canvas.height / 2;
+
+  var ship1Destination = {
+    x: ship1.x,
+    y: ship1.y,
+  };
+
+  var distance;
+
+  setInterval(function () {
+    ship1Destination.x = Math.random() * canvas.width;
+    ship1Destination.y = Math.random() * canvas.height;
+
+    distance = calculateDistance(ship1Destination, ship1);
+  }, 5000);
 
   // TODO 6: Add the ship to the stage //
-  stage.addChild(ship);
+  stage.addChild(ship1, ship2);
 
   function update(event) {
     /*
@@ -32,16 +50,39 @@
      * method takes two points. What do you need to do to translate
      * these values such that they're packed into a point?
      */
-    const calculateRotation = gamington.numz.getAngleDegrees;
-
-    var mouse = {
+    const mouse = {
       x: stage.mouseX,
       y: stage.mouseY,
     };
-    var degrees = calculateRotation(mouse, ship);
+
+    ship2.x = mouse.x;
+    ship2.y = mouse.y;
+
+    var degrees = calculateRotation(ship2, ship1);
 
     // TODO 8: Set the ship's rotation property to the degrees //
-    ship.rotation = degrees;
+    ship1.rotation = degrees;
+    ship2.rotation = degrees - 180;
+
+    var ship1SpeedX = distance / 60;
+    var ship1SpeedY = distance / 60;
+
+    if (ship1.x < ship1Destination.x - 2) {
+      ship1.x += ship1SpeedX;
+    } else if (ship1.x > ship1Destination.x + 2) {
+      ship1.x -= ship1SpeedX;
+    } else {
+      ship1SpeedX = 0;
+    }
+    if (ship1.y < ship1Destination.y - 2) {
+      ship1.y += ship1SpeedY;
+    } else if (ship1.y > ship1Destination.y + 2) {
+      ship1.y -= ship1SpeedY;
+    } else {
+      ship1SpeedY = 0;
+    }
+    ship1.x = Math.ceil(ship1.x);
+    ship1.y = Math.ceil(ship1.y);
 
     /*
      * TODO 9: Uncomment the line below to update the textfield
