@@ -16,7 +16,7 @@ const server = http
         });
         req.on("end", function () {
           parsedBody = JSON.parse(body);
-          serverStatus = parsedBody.message;
+          serverStatus = parsedBody.status;
         });
         res.writeHead(200, { "Content-Type": "text/plain" });
         res.write("The server has been updated.");
