@@ -17,12 +17,11 @@ const server = http
         req.on("end", function () {
           parsedBody = JSON.parse(body);
           serverStatus = parsedBody.message;
-          res.writeHead(200, { "Content-Type": "text/plain" });
-          res.write("The server has been updated.");
         });
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.write("The server has been updated.");
       }
     } catch {
-      res.writeHead(500, { "Content-Type": "text/plain" });
       res.write("The server has no data.");
     } finally {
       res.write("-and the message arrived");
