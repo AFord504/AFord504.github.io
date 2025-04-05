@@ -213,6 +213,10 @@ _.each = function (coll, func) {
     }
   }
   if (type(coll) === "Object") {
+    const entries = Object.entries(coll);
+    entries.forEach(([key, value]) => {
+      func(value, key, coll);
+    });
   }
 };
 
@@ -225,6 +229,27 @@ _.each = function (coll, func) {
  * Examples:
  *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
  */
+
+_.unique = function (arr) {
+  console.log(arr);
+  var arrCopy = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrCopy.push(arr[i]);
+  }
+
+  var newArr = [];
+  for (var i = 0; i < arrCopy.length; i++) {
+    var indexCopy = arrCopy[i];
+    console.log(indexCopy);
+    arrCopy[i] = "something unique";
+    if (_.indexOf(arrCopy, indexCopy) === -1) {
+      newArr.push(indexCopy);
+    }
+  }
+
+  console.log(newArr);
+  return newArr;
+};
 
 /** _.filter
  * Arguments:

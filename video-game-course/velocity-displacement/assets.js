@@ -42,6 +42,7 @@
       ship.cache(-radius - 10, -radius - 10, radius * 2 + 15, radius * 2 + 15);
 
       // TODO 6: Merge the ship with your game libs makeBody()
+      Object.assign(ship, gamington.phyz.makeBody("ship"));
 
       // give the ship a default propulsion //
       ship.propulsion = 0;

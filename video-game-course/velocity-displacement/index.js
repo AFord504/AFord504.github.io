@@ -33,6 +33,8 @@
      * is available to you in this scope as, "this".
      * 2. What are the x and y forces acting on our ship?
      */
+    gamington.phyz.updateVelocity(this, ship.propulsion, ship.propulsion);
+    console.log(ship);
 
     // also check if the ship needs to rebound off a boundary //
     reboundCircularAssetInArea(this, canvas);
@@ -47,6 +49,8 @@
   engine.addTickHandlers(space.update).activateTick();
 
   // listen for user pressing keys down //
+  var leftDown = false;
+  var rightDown = false;
   document.onkeydown = function (event) {
     /*
      * Up arrow can be pressed in combo with other keys.
@@ -61,16 +65,31 @@
      * same time. rotationalVelocity is set to -5 when
      * ArrowLeft is pressed, and 5 when its ArrowRight.
      */
-    if (event.key === "ArrowLeft") {
+    if (event.key === "ArrowLeft" && rightDown === false) {
       ship.rotationalVelocity = -5;
-    } else if (event.key === "ArrowRight") {
+      leftDown = true;
+    }
+    if (event.key === "ArrowRight" && leftDown === false) {
       ship.rotationalVelocity = 5;
+      rightDown = true;
     }
   };
 
   // listen for user releasing keys //
   document.onkeyup = function (event) {
     // TODO 13: How do we stop the application of forces?
+    if (event.key === "ArrowUp") {
+      ship.propulsion = 0;
+    }
+
+    if (event.key === "ArrowLeft" && rightDown === false) {
+      ship.rotationalVelocity = 0;
+      leftDown = false;
+    }
+    if (event.key === "ArrowRight" && leftDown === false) {
+      ship.rotationalVelocity = 0;
+      rightDown = false;
+    }
   };
 
   function reboundCircularAssetInArea(body, area) {
@@ -85,9 +104,11 @@
       // we've struck the right side of the area //
       body.x = right - radius;
       body.velocityX *= -1;
-    } else if (/* TODO 9: Check if body's hit left side */ false) {
+    } else if (body.x - radius < left) {
       // we've struck the left side of the area //
       // TODO 10: Code the reaction to hitting the left side
+      body.x = left + radius;
+      body.velocityX *= -1;
     }
 
     // check for hit on top or bottom //
@@ -95,9 +116,11 @@
       // we've struck the right side of the area //
       body.y = top + radius;
       body.velocityY *= -1;
-    } else if (/* TODO 11: Check if body's hit bottom */ false) {
+    } else if (body.y + radius > bottom) {
       // we've struck the bottom of the area //
       // TODO 12: Code the reaction to hitting the bottom
+      body.y = bottom - radius;
+      body.velocityY *= -1;
     }
   }
 
