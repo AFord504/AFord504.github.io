@@ -1,5 +1,5 @@
 const g = require("onoff").Gpio;
-const s = new g(4, "in", "both");
+const s = new g(516, "in", "both");
 
 s.watch((e, v) => {
   if (e) exit(e);

@@ -1,6 +1,6 @@
-const s = require('node-dht-sensor');
+const s = require("node-dht-sensor");
 
-s.initialize(22, 17); 
+s.initialize(22, 17);
 const i = setInterval(read, 2000);
 
 function read() {
@@ -8,11 +8,11 @@ function read() {
   console.log(r);
   console.log(`Temperature: ${r.temperature.toFixed(2)} C,\n 
               Humidity: ${r.humidity.toFixed(2)} %`);
-};
+}
 
-process.on('SIGINT', function () {
+process.on("SIGINT", function () {
   clearInterval(i);
-  
+
   function wrap() {
     return function () {
       console.log("Bye, bye!");
@@ -21,4 +21,3 @@ process.on('SIGINT', function () {
   }
   wrap()();
 });
-
