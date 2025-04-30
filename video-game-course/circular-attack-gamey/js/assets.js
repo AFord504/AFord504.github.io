@@ -78,6 +78,7 @@
         return projectile;
       },
       makeShip(color) {
+        /*
         const radius = 25,
           ship = draw.rect(
             radius,
@@ -94,8 +95,10 @@
         draw.circle(radius, "#CCC", null, null, null, null, ship);
         draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
+        */
 
         /*
+        // Homing
         ship = draw.rect(
           radius,
           radius,
@@ -112,6 +115,24 @@
         draw.polyStar(radius, 4, 0, 0, color, null, null, null, null, ship);
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
         */
+
+        // Multishot
+        ship = draw.rect(
+          radius,
+          radius,
+          color,
+          null,
+          null,
+          -(radius + radius / 10),
+          -(radius / 2)
+        );
+
+        // continue to draw on the ship Shape to create our design //
+        draw.polyStar(radius, 3, 0, 180, color, null, null, radius, null, ship);
+        draw.circle(radius + 3, color, null, null, null, null, ship);
+        draw.circle(radius, "#CCC", null, null, null, null, ship);
+        draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
+        draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
 
         // reset the radius, other non-radii drawing operations have overwritten it //
         ship.radius = radius + 3;
