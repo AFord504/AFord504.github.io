@@ -47,6 +47,16 @@
       phyz.reboundCircularAssetInArea(this, canvas);
     }
 
+    function updateHoming(event) {
+      phyz.updateVelocity(this, 0, 0);
+      phyz.reboundCircularAssetInArea(this, canvas);
+    }
+
+    function updateMultishot(event) {
+      phyz.updateVelocity(this, 0, 0);
+      phyz.reboundCircularAssetInArea(this, canvas);
+    }
+
     function updateProjectile(impact) {
       phyz.reboundCircularAssetInArea(this, canvas);
     }
@@ -78,7 +88,6 @@
         return projectile;
       },
       makeShip(color) {
-        /*
         const radius = 25,
           ship = draw.rect(
             radius,
@@ -95,7 +104,6 @@
         draw.circle(radius, "#CCC", null, null, null, null, ship);
         draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
-        */
 
         /*
         // Homing
@@ -116,6 +124,7 @@
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
         */
 
+        /*
         // Multishot
         ship = draw.rect(
           radius,
@@ -126,13 +135,12 @@
           -(radius + radius / 10),
           -(radius / 2)
         );
-
-        // continue to draw on the ship Shape to create our design //
-        draw.polyStar(radius, 3, 0, 180, color, null, null, radius, null, ship);
+        draw.rect(25, 50, color, null, null, 10, -25, ship);
         draw.circle(radius + 3, color, null, null, null, null, ship);
         draw.circle(radius, "#CCC", null, null, null, null, ship);
         draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
+        */
 
         // reset the radius, other non-radii drawing operations have overwritten it //
         ship.radius = radius + 3;
@@ -217,7 +225,74 @@
 
         return orb;
       },
-      makeHoming() {},
+      makeHoming() {
+        const radius = 15;
+        const homing = draw.rect(radius, radius, "red", null, null, null, null);
+
+        draw.circle(radius + 2, "red", null, null, null, null, homing);
+        draw.circle(radius, "pink", null, null, null, null, homing);
+        draw.polyStar(radius, 4, 0, 0, "red", null, null, null, null, homing);
+        draw.circle(radius - 9, "pink", null, null, -4, null, homing);
+
+        Object.assign(
+          homing,
+          phyz.makeBody("homing", {
+            density: (homing.radius / 20) * 0.5,
+            volatility: homing.radius * 0.0001,
+          })
+        );
+        phyz.addRandomVelocity(homing, canvas);
+        homing.update = updateHoming;
+
+        homing.x = numz.randomIntBetween(0, canvas.width);
+        homing.y = numz.randomIntBetween(0, canvas.height);
+
+        return homing;
+      },
+
+      makeMultishot() {
+        const radius = 15;
+        const multishot = draw.rect(
+          radius,
+          radius,
+          "yellow",
+          null,
+          null,
+          null,
+          null
+        );
+
+        draw.circle(radius + 2, "yellow", null, null, null, null, multishot);
+        draw.circle(radius, "white", null, null, null, null, multishot);
+        draw.polyStar(
+          radius,
+          4,
+          0,
+          0,
+          "yellow",
+          null,
+          null,
+          null,
+          null,
+          multishot
+        );
+        draw.circle(radius - 9, "white", null, null, -4, null, multishot);
+
+        Object.assign(
+          multishot,
+          phyz.makeBody("multishot", {
+            density: (multishot.radius / 20) * 0.5,
+            volatility: multishot.radius * 0.0001,
+          })
+        );
+        phyz.addRandomVelocity(multishot, canvas);
+        multishot.update = updateMultishot;
+
+        multishot.x = numz.randomIntBetween(0, canvas.width);
+        multishot.y = numz.randomIntBetween(0, canvas.height);
+
+        return multishot;
+      },
       centerOnStage,
     };
   });
