@@ -105,43 +105,6 @@
         draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
         draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
 
-        /*
-        // Homing
-        ship = draw.rect(
-          radius,
-          radius,
-          color,
-          null,
-          null,
-          -(radius + radius / 10),
-          -(radius / 2)
-        );
-        draw.polyStar(radius, 3, 0, 180, color, null, null, radius, null, ship);
-        draw.rect(radius, radius, color, null, null, -radius + 50, -radius / 2);
-        draw.circle(radius + 3, color, null, null, null, null, ship);
-        draw.circle(radius, "#CCC", null, null, null, null, ship);
-        draw.polyStar(radius, 4, 0, 0, color, null, null, null, null, ship);
-        draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
-        */
-
-        /*
-        // Multishot
-        ship = draw.rect(
-          radius,
-          radius,
-          color,
-          null,
-          null,
-          -(radius + radius / 10),
-          -(radius / 2)
-        );
-        draw.rect(25, 50, color, null, null, 10, -25, ship);
-        draw.circle(radius + 3, color, null, null, null, null, ship);
-        draw.circle(radius, "#CCC", null, null, null, null, ship);
-        draw.polyStar(radius, 3, 0, 0, color, null, null, null, null, ship);
-        draw.circle(radius - 15, "#CCC", null, null, -5, null, ship);
-        */
-
         // reset the radius, other non-radii drawing operations have overwritten it //
         ship.radius = radius + 3;
         ship.color = color;
@@ -154,6 +117,8 @@
           radius * 2 + 15,
           radius * 2 + 15
         );
+
+        ship.fireType = "normal";
 
         // Merge the ship with your game libs makeBody()
         Object.assign(ship, phyz.makeBody("ship"));

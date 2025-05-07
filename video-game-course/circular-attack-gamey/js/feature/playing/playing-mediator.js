@@ -44,7 +44,7 @@
             FIRE: controls.KEYS.SHIFT_LEFT,
           })
           .spawn("#f44242"),
-        orb = opspark.playa.orb(assets, fx, messenger).spawn(25);
+        orb = opspark.playa.orb(assets, fx, messenger).spawn(10);
 
       homing = opspark.playa.homing(assets, fx, messenger).spawn(2);
 

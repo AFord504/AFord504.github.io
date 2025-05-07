@@ -76,6 +76,9 @@
          * if it has integrity before running check to exlode.
          */
         if (this.integrity > 0) {
+          if (body.type === "ship") {
+            this.integrity = 0;
+          }
           console.log(impact);
           this.integrity -= impact;
           if (this.integrity <= 0) {
@@ -89,6 +92,7 @@
               target: this,
               incoming: body,
             });
+            console.log("ship", assets);
           }
         }
       }
