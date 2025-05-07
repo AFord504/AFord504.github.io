@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "epoll": "^4.0.2",
+    "express": "^5.1.0",
+    "node-dht-sensor": "^0.4.5",
+    "node-json2html": "^3.3.3",
+    "onoff": "^6.0.3",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
