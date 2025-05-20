@@ -69,7 +69,6 @@
       function handleCollision(impact, body) {
         // don't handle collisions between orbs //
         if (body.type === this.type) return;
-
         /*
          * Because the explosion is async, the multishot may exist
          * but have already exploded, so check first to see
@@ -79,8 +78,17 @@
           if (body.type === "ship") {
             this.integrity = 0;
             body.fireType = "multishot";
+            setTimeout(() => {
+              body.fireType = "normal";
+            }, 5000);
+          } else if (body.type === "projectile") {
+            this.intergrity = 0;
+            body.emitter.fireType = "multishot";
+            setTimeout(() => {
+              body.emitter.fireType = "normal";
+            }, 5000);
           }
-          console.log(impact);
+          //console.log(impact);
           this.integrity -= impact;
           if (this.integrity <= 0) {
             fx.makeEmitter(2, 3, "rgba(214, 36, 84, 0.2)", null, [
@@ -93,7 +101,10 @@
               target: this,
               incoming: body,
             });
-            console.log("ship", assets);
+            //assets.ship.fireType = "multishot";
+            setTimeout(() => {
+              opspark.playa.multishot(assets, fx, messenger).spawn(1);
+            }, 15000);
           }
         }
       }

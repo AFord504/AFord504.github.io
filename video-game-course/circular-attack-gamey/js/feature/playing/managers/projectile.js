@@ -48,7 +48,6 @@
       // return the projectile manager api //
       return {
         fire: function (emitter) {
-          console.log(emitter.fireType);
           var projectile, degrees;
 
           projectile = pool.get();
@@ -167,6 +166,10 @@
               .call(onTweenComplete);
 
             messenger.dispatch({ type: "SPAWN", bodies: [projectile3] });
+
+            setTimeout(() => {
+              emitter.fireType = "normal";
+            }, 5000);
           }
         },
       };

@@ -79,7 +79,7 @@
           if (body.type === "ship") {
             this.integrity = 0;
           }
-          console.log(impact);
+          //console.log(impact);
           this.integrity -= impact;
           if (this.integrity <= 0) {
             fx.makeEmitter(2, 3, "rgba(214, 36, 84, 0.2)", null, [
@@ -92,7 +92,6 @@
               target: this,
               incoming: body,
             });
-            console.log("ship", assets);
           }
         }
       }

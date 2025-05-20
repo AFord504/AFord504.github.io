@@ -198,6 +198,7 @@
         draw.circle(radius, "pink", null, null, null, null, homing);
         draw.polyStar(radius, 4, 0, 0, "red", null, null, null, null, homing);
         draw.circle(radius - 9, "pink", null, null, -4, null, homing);
+        draw.circle(radius, "#ff000000", null, null, null, null, homing);
 
         Object.assign(
           homing,
@@ -242,6 +243,7 @@
           multishot
         );
         draw.circle(radius - 9, "white", null, null, -4, null, multishot);
+        draw.circle(radius, "#ff000000", null, null, null, null, multishot);
 
         Object.assign(
           multishot,
