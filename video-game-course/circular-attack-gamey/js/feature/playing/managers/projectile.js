@@ -10,7 +10,7 @@
     /**
      * Creates and returns the projectile manager.
      */
-    function (fx, assets, messenger) {
+    function (fx, assets, messenger, orb) {
       const objects = [],
         pool = {
           objects: objects,
@@ -71,6 +71,7 @@
           //projectile.activate();
           projectile.x = projectilePoint.x;
           projectile.y = projectilePoint.y;
+          console.log("ship", orb);
 
           // keep a reference on the projectile to who shot the projectile //
           projectile.emitter = emitter;
@@ -86,7 +87,7 @@
 
           messenger.dispatch({ type: "SPAWN", bodies: [projectile] });
 
-          ///////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////////////
 
           if (emitter.fireType === "multishot") {
             var projectile2, degrees;
@@ -166,10 +167,6 @@
               .call(onTweenComplete);
 
             messenger.dispatch({ type: "SPAWN", bodies: [projectile3] });
-
-            setTimeout(() => {
-              emitter.fireType = "normal";
-            }, 5000);
           }
         },
       };

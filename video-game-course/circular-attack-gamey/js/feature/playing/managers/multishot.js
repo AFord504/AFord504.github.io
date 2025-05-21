@@ -101,7 +101,6 @@
               target: this,
               incoming: body,
             });
-            //assets.ship.fireType = "multishot";
             setTimeout(() => {
               opspark.playa.multishot(assets, fx, messenger).spawn(1);
             }, 15000);
