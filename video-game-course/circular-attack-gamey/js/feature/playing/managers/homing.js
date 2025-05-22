@@ -78,16 +78,20 @@
         if (this.integrity > 0) {
           if (body.type === "ship") {
             this.integrity = 0;
-            body.fireType = "homing";
-            setTimeout(() => {
-              body.fireType = "normal";
-            }, 5000);
+            if (body.fireType === "normal") {
+              body.fireType = "homing";
+              setTimeout(() => {
+                body.fireType = "normal";
+              }, 5000);
+            }
           } else if (body.type === "projectile") {
             this.intergrity = 0;
-            body.emitter.fireType = "homing";
-            setTimeout(() => {
-              body.emitter.fireType = "normal";
-            }, 5000);
+            if (body.emitter.fireType === "normal") {
+              body.emitter.fireType = "homing";
+              setTimeout(() => {
+                body.emitter.fireType = "normal";
+              }, 5000);
+            }
           }
           //console.log(impact);
           this.integrity -= impact;
